@@ -48,7 +48,7 @@ public class Analytics {
         tracker.setScreenName(screenName);
         tracker.send(new HitBuilders.AppViewBuilder().build());
 
-        Answers.getInstance().logContentView(new ContentViewEvent().putContentName(screenName));
+//        Answers.getInstance().logContentView(new ContentViewEvent().putContentName(screenName));
     }
 
     public void event(final String category, final String action) {
