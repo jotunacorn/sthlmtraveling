@@ -40,8 +40,7 @@ public class MainActivity extends Activity implements DataApi.DataListener, Mess
     public static String lastLocation = "";
     private static final int LOCATION_LENGTH = 15;
     private static final int HEADER_LENGTH = 13;
-    private RelativeLayout mRectBackground;
-    private RelativeLayout mRoundBackground;
+    private RelativeLayout mBackground;
     private final int textColor = Color.BLACK;
     private GestureDetectorCompat mGestureDetector;
     private DismissOverlayView mDismissOverlayView;
@@ -79,16 +78,8 @@ public class MainActivity extends Activity implements DataApi.DataListener, Mess
     public void onCreate(Bundle b) {
         super.onCreate(b);
         setContentView(R.layout.activity_main);
+        mBackground = (RelativeLayout) findViewById(R.id.inner_layout);
 
-        WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
-        stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
-            @Override
-            public void onLayoutInflated(WatchViewStub stub) {
-                mRectBackground = (RelativeLayout) findViewById(R.id.rect_layout);
-                mRoundBackground = (RelativeLayout) findViewById(R.id.round_layout);
-            }
-        });
-        mGestureDetector = new GestureDetectorCompat(this, new LongPressListener());
         final ArrayList<TravelEvent> list = new ArrayList<TravelEvent>();
         adapter = new StableArrayAdapter(this,
                 android.R.layout.simple_list_item_1, list);
@@ -148,28 +139,16 @@ public class MainActivity extends Activity implements DataApi.DataListener, Mess
             final LinkedList<TravelEvent> ridesCopy = rides;
 
             adapter.addAll(ridesCopy);
-            if(mRectBackground != null) {
-                MainActivity.this.mRectBackground.post(new Runnable() {
-                    public void run() {
-                        adapter.notifyDataSetChanged();
-                        ListView listview = null;
-                        listview = (ListView) mRectBackground.findViewById(R.id.rides);
-                        mRectBackground.findViewById(R.id.progressBar).setVisibility(View.GONE);
-                        listview.setAdapter(adapter);
-                    }
-                });
-            }
-            if(mRoundBackground != null){
-                MainActivity.this.mRoundBackground.post(new Runnable() {
-                    public void run() {
-                        adapter.notifyDataSetChanged();
-                        ListView listview = null;
-                        listview = (ListView) mRoundBackground.findViewById(R.id.rides);
-                        mRoundBackground.findViewById(R.id.progressBar).setVisibility(View.GONE);
-                        listview.setAdapter(adapter);
-                    }
-                });
-            }
+            MainActivity.this.mBackground.post(new Runnable() {
+                public void run() {
+                    adapter.notifyDataSetChanged();
+                    ListView listview = null;
+                    listview = (ListView) mBackground.findViewById(R.id.rides);
+                    mBackground.findViewById(R.id.progressBar).setVisibility(View.GONE);
+                    listview.setAdapter(adapter);
+                }
+            });
+
 
         }
         else if(path.equals("AVAILABLE_LOCATIONS")){
@@ -184,28 +163,16 @@ public class MainActivity extends Activity implements DataApi.DataListener, Mess
             }
             rides.add(new TravelEvent("","","",""));
             adapter.addAll(rides);
-            if(mRectBackground != null) {
-                MainActivity.this.mRectBackground.post(new Runnable() {
-                    public void run() {
-                        adapter.notifyDataSetChanged();
-                        ListView listview = null;
-                        listview = (ListView) mRectBackground.findViewById(R.id.rides);
-                        mRectBackground.findViewById(R.id.progressBar).setVisibility(View.GONE);
-                        listview.setAdapter(adapter);
-                    }
-                });
-            }
-            if(mRoundBackground != null){
-                MainActivity.this.mRoundBackground.post(new Runnable() {
-                    public void run() {
-                        adapter.notifyDataSetChanged();
-                        ListView listview = null;
-                        listview = (ListView) mRoundBackground.findViewById(R.id.rides);
-                        mRoundBackground.findViewById(R.id.progressBar).setVisibility(View.GONE);
-                        listview.setAdapter(adapter);
-                    }
-                });
-            }
+            MainActivity.this.mBackground.post(new Runnable() {
+                public void run() {
+                    adapter.notifyDataSetChanged();
+                    ListView listview = null;
+                    listview = (ListView) mBackground.findViewById(R.id.rides);
+                    mBackground.findViewById(R.id.progressBar).setVisibility(View.GONE);
+                    listview.setAdapter(adapter);
+                }
+            });
+
         }
     }
 
@@ -307,17 +274,7 @@ public class MainActivity extends Activity implements DataApi.DataListener, Mess
         }*/
     }
 
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent event) {
-        return mGestureDetector.onTouchEvent(event) || super.dispatchTouchEvent(event);
-    }
 
-    private class LongPressListener extends GestureDetector.SimpleOnGestureListener {
-        @Override
-        public void onLongPress(MotionEvent event) {
-            mDismissOverlayView.show();
-        }
-    }
     private class ListClick implements View.OnClickListener {
         @Override
         public void onClick(View v) {
