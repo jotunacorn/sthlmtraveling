@@ -6,7 +6,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "com.example.sthlmtraveling"
+        applicationId "com.markupartist.sthlmtraveling"
         minSdkVersion 21
         targetSdkVersion 23
         versionCode 1

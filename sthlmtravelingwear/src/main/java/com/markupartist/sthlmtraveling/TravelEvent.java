@@ -1,4 +1,4 @@
-package com.example.sthlmtraveling;
+package com.markupartist.sthlmtraveling;
 
 /**
  * Created by Joakim af Sandeberg on 2015-05-02.

@@ -1,14 +1,11 @@
-package com.example.sthlmtraveling;
+package com.markupartist.sthlmtraveling;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.wearable.view.DismissOverlayView;
-import android.support.wearable.view.WatchViewStub;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
