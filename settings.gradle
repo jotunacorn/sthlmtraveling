@@ -1,2 +1,2 @@
 //include ':sthlmtraveling', ':ViewPageIndicator'
-include ':sthlmtraveling'
+include ':sthlmtraveling', ':sthlmtravelingwear'
